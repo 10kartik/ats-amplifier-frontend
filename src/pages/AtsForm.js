@@ -1,9 +1,3 @@
-// Build a nice UI for the form that takes 2 inputs -
-// 1 that accepts PDF file and 2nd field accepts text
-
-// on submit it sends data to backend:
-// POST {{process.env.baseURL}}/api/boost
-// against parameter named pdf and text
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
@@ -103,6 +97,7 @@ const AtsForm = () => {
               value={text}
               onChange={handleTextChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-sm p-2"
+              style={{ color: "black" }}
             />
           </div>
           <button
