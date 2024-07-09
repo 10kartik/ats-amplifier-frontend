@@ -42,7 +42,6 @@ const AtsForm = () => {
         }
       );
       setResponseUrl(response.data.url);
-      console.log("Success:", response.data);
     } catch (error) {
       console.error("Error posting the data", error);
     } finally {
