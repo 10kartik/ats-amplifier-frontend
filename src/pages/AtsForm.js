@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const AtsForm = () => {
@@ -7,6 +7,12 @@ const AtsForm = () => {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [responseUrl, setResponseUrl] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // State to manage button disabled status
+
+  useEffect(() => {
+    // Enable button only if a file is attached and text is not empty
+    setIsButtonDisabled(!(pdfFile && text.trim()));
+  }, [pdfFile, text]); // Depend on pdfFile and text
 
   const handlePdfChange = (event) => {
     setPdfFile(event.target.files[0]);
@@ -19,6 +25,7 @@ const AtsForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
+    setIsButtonDisabled(true); // Disable button on submit
 
     const formData = new FormData();
     formData.append("pdf", pdfFile);
@@ -35,7 +42,6 @@ const AtsForm = () => {
         }
       );
       setResponseUrl(response.data.url);
-      console.log("Success:", response.data);
     } catch (error) {
       console.error("Error posting the data", error);
     } finally {
@@ -102,7 +108,12 @@ const AtsForm = () => {
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            disabled={isButtonDisabled || loading} // Disable button based on state or loading status
+            className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+              isButtonDisabled || loading
+                ? "bg-gray-400"
+                : "bg-blue-600 hover:bg-blue-700"
+            } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
           >
             {loading ? "Submitting..." : "Submit"}
           </button>

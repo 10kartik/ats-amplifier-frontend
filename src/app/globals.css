@@ -49,3 +49,25 @@ body {
 .fadeInOut {
   animation: fadeInOut 2s ease-in-out infinite;
 }
+
+.gradient-text {
+  font-size: 4rem;
+  font-weight: bold;
+  background-clip: text;
+  text-fill-color: transparent;
+  fill: transparent;
+  background: repeating-linear-gradient(
+  #ef476f,
+  #ddbea9,
+    #ffd166
+    );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .gradient-text {
+    font-size: 2rem;
+    /* Smaller font size for mobile screens */
+  }
+}
