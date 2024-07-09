@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import AtsForm from "../pages/AtsForm";
 import { FaGithub } from "react-icons/fa"; // Assuming you're using react-icons for icons
+import { TypeAnimation } from "react-type-animation";
 
 const Modal = ({ isOpen, onClose, children }) => {
   const modalRef = useRef();
@@ -55,9 +56,21 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">
-      <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 dark:from-purple-300 dark:via-pink-400 dark:to-red-400">
-        ATS Hacker
-      </h1>
+      <TypeAnimation
+        sequence={[
+          "ATS SCORE AMPLIFIER",
+          5500,
+          "ATS SCORE HACKER",
+          5500,
+          "ATS SCORE BOOSTER",
+          5500,
+          () => {},
+        ]}
+        wrapper="h1"
+        cursor={true}
+        repeat={Infinity}
+        className="gradient-text"
+      />
       {/* call component named ats-form */}
       <AtsForm />
       {/* Add a footer here */}
