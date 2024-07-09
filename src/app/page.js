@@ -56,21 +56,24 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">
-      <TypeAnimation
-        sequence={[
-          "ATS SCORE AMPLIFIER",
-          5500,
-          "ATS SCORE HACKER",
-          5500,
-          "ATS SCORE BOOSTER",
-          5500,
-          () => {},
-        ]}
-        wrapper="h1"
-        cursor={true}
-        repeat={Infinity}
-        className="gradient-text"
-      />
+      <div className="flex flex-col items-center">
+        <h1 className="gradient-text">ATS SCORE</h1>
+        <TypeAnimation
+          sequence={[
+            "AMPLIFIER",
+            3500,
+            "HACKER",
+            3500,
+            "BOOSTER",
+            3500,
+            () => {},
+          ]}
+          wrapper="h1"
+          cursor={true}
+          repeat={Infinity}
+          className="gradient-text"
+        />
+      </div>
       {/* call component named ats-form */}
       <AtsForm />
       {/* Add a footer here */}
