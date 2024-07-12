@@ -34,10 +34,42 @@ const AtsForm = () => {
     setText(event.target.value);
   };
 
+  function handleFileAndTextUpload(file, text) {
+    const fileSizeInMB = file.size / 1024 / 1024; // Convert bytes to MB
+    const textLength = text.length;
+
+    if (fileSizeInMB > 1.5 || textLength > 5000) {
+      let message = "";
+      if (fileSizeInMB > 1.5) {
+        message +=
+          "File size is more than 1.5MB. \nConsider using PDF Compressor to reduce the size.";
+      }
+      if (textLength > 6000) {
+        message += "Text characters are more than 6k.";
+      }
+      showModal(message); // Show modal with the message
+      return; // Stop further execution
+    }
+  }
+
+  // Example usage of showModal function
+  function showModal(message) {
+    // Implementation depends on how you show modals in your application
+    // This could be a simple alert or a more complex modal component
+    alert(message);
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setIsButtonDisabled(true); // Disable button on submit
+
+    const checkResult = handleFileAndTextUpload(pdfFile, text);
+    if (checkResult === false) {
+      setLoading(false);
+      setIsButtonDisabled(false);
+      return; // Stop the submission if the check fails
+    }
 
     const formData = new FormData();
     formData.append("pdf", pdfFile);
