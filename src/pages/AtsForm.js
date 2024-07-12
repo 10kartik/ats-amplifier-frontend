@@ -38,7 +38,7 @@ const AtsForm = () => {
     const fileSizeInMB = file.size / 1024 / 1024; // Convert bytes to MB
     const textLength = text.length;
 
-    if (fileSizeInMB > 1.5 || textLength > 5000) {
+    if (fileSizeInMB > 1.5 || textLength > 6000) {
       let message = "";
       if (fileSizeInMB > 1.5) {
         message +=
@@ -48,7 +48,7 @@ const AtsForm = () => {
         message += "Text characters are more than 6k.";
       }
       showModal(message); // Show modal with the message
-      return; // Stop further execution
+      return false; // Stop further execution
     }
   }
 
