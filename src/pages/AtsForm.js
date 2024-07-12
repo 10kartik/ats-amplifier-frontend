@@ -156,10 +156,10 @@ const AtsForm = () => {
         {responseUrl && (
           <div className="mt-4 text-center">
             <a
-              href={responseUrl}
-              className="text-blue-600 visited:text-purple-600 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() =>
+                window.open(responseUrl, "_blank", "noopener,noreferrer")
+              }
+              className="inline-block px-6 py-2 text-white font-bold bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition ease-in-out duration-150"
             >
               View Document
             </a>

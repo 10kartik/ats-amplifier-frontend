@@ -32,6 +32,8 @@ export default function Home() {
   const [gradientStyle, setGradientStyle] = useState({});
 
   useEffect(() => {
+    let isRequestMade = false;
+
     const updateGradient = () => {
       // Function to generate random color
       const randomColor = () =>
@@ -50,6 +52,19 @@ export default function Home() {
 
     updateGradient(); // Initial update
     const intervalId = setInterval(updateGradient, 2000); // Update every 2 seconds
+
+    const warmUpLambda = async () => {
+      if (isRequestMade) return;
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
+        await fetch(`${baseUrl}/health`);
+        console.log("Lambda warmed up successfully");
+      } catch (error) {
+        console.error("Error warming up lambda:", error);
+      }
+    };
+
+    warmUpLambda();
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, []);
