@@ -10,6 +10,14 @@ const AtsForm = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true); // State to manage button disabled status
 
   useEffect(() => {
+    const textarea = document.getElementById("text");
+    if (textarea) {
+      textarea.style.height = "inherit"; // Reset height to recalculate
+      textarea.style.height = `${textarea.scrollHeight}px`; // Set to scroll height
+    }
+  }, []);
+
+  useEffect(() => {
     // Enable button only if a file is attached and text is not empty
     setIsButtonDisabled(!(pdfFile && text.trim()));
   }, [pdfFile, text]); // Depend on pdfFile and text
@@ -19,6 +27,10 @@ const AtsForm = () => {
   };
 
   const handleTextChange = (event) => {
+    const textarea = event.target;
+    // Ensure the textarea grows to fit content, but also shrinks when content is removed
+    textarea.style.height = "inherit"; // Reset height to recalculate
+    textarea.style.height = `${textarea.scrollHeight}px`;
     setText(event.target.value);
   };
 
@@ -96,14 +108,20 @@ const AtsForm = () => {
             >
               Text:
             </label>
-            <input
+            <textarea
               type="text"
               id="text"
               name="text"
               value={text}
               onChange={handleTextChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-sm p-2"
-              style={{ color: "black" }}
+              style={{
+                color: "black",
+                height: "auto",
+                minHeight: "50px",
+                resize: "vertical",
+                maxHeight: "350px",
+              }}
             />
           </div>
           <button
