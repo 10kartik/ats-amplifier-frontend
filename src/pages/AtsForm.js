@@ -10,6 +10,14 @@ const AtsForm = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true); // State to manage button disabled status
 
   useEffect(() => {
+    const textarea = document.getElementById("text");
+    if (textarea) {
+      textarea.style.height = "inherit"; // Reset height to recalculate
+      textarea.style.height = `${textarea.scrollHeight}px`; // Set to scroll height
+    }
+  }, []);
+
+  useEffect(() => {
     // Enable button only if a file is attached and text is not empty
     setIsButtonDisabled(!(pdfFile && text.trim()));
   }, [pdfFile, text]); // Depend on pdfFile and text
@@ -19,13 +27,49 @@ const AtsForm = () => {
   };
 
   const handleTextChange = (event) => {
+    const textarea = event.target;
+    // Ensure the textarea grows to fit content, but also shrinks when content is removed
+    textarea.style.height = "inherit"; // Reset height to recalculate
+    textarea.style.height = `${textarea.scrollHeight}px`;
     setText(event.target.value);
   };
+
+  function handleFileAndTextUpload(file, text) {
+    const fileSizeInMB = file.size / 1024 / 1024; // Convert bytes to MB
+    const textLength = text.length;
+
+    if (fileSizeInMB > 1.5 || textLength > 6000) {
+      let message = "";
+      if (fileSizeInMB > 1.5) {
+        message +=
+          "File size is more than 1.5MB. \nConsider using PDF Compressor to reduce the size.";
+      }
+      if (textLength > 6000) {
+        message += "Text characters are more than 6k.";
+      }
+      showModal(message); // Show modal with the message
+      return false; // Stop further execution
+    }
+  }
+
+  // Example usage of showModal function
+  function showModal(message) {
+    // Implementation depends on how you show modals in your application
+    // This could be a simple alert or a more complex modal component
+    alert(message);
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setIsButtonDisabled(true); // Disable button on submit
+
+    const checkResult = handleFileAndTextUpload(pdfFile, text);
+    if (checkResult === false) {
+      setLoading(false);
+      setIsButtonDisabled(false);
+      return; // Stop the submission if the check fails
+    }
 
     const formData = new FormData();
     formData.append("pdf", pdfFile);
@@ -96,14 +140,20 @@ const AtsForm = () => {
             >
               Text:
             </label>
-            <input
+            <textarea
               type="text"
               id="text"
               name="text"
               value={text}
               onChange={handleTextChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-sm p-2"
-              style={{ color: "black" }}
+              style={{
+                color: "black",
+                height: "auto",
+                minHeight: "50px",
+                resize: "vertical",
+                maxHeight: "350px",
+              }}
             />
           </div>
           <button
@@ -138,10 +188,10 @@ const AtsForm = () => {
         {responseUrl && (
           <div className="mt-4 text-center">
             <a
-              href={responseUrl}
-              className="text-blue-600 visited:text-purple-600 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() =>
+                window.open(responseUrl, "_blank", "noopener,noreferrer")
+              }
+              className="inline-block px-6 py-2 text-white font-bold bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition ease-in-out duration-150"
             >
               View Document
             </a>
