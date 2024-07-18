@@ -76,11 +76,11 @@ export default function Home() {
         <TypeAnimation
           sequence={[
             "AMPLIFIER",
-            3500,
+            1500,
             "HACKER",
-            3500,
+            1500,
             "BOOSTER",
-            3500,
+            1500,
             () => {},
           ]}
           wrapper="h1"

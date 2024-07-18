@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import initialText from "@/lib/helpers";
 
 const AtsForm = () => {
   const [pdfFile, setPdfFile] = useState(null);
-  const [text, setText] = useState("");
+  const [text, setText] = useState(initialText);
   const [loading, setLoading] = useState(false);
   const [responseUrl, setResponseUrl] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true); // State to manage button disabled status
@@ -38,14 +39,14 @@ const AtsForm = () => {
     const fileSizeInMB = file.size / 1024 / 1024; // Convert bytes to MB
     const textLength = text.length;
 
-    if (fileSizeInMB > 1.5 || textLength > 6000) {
+    if (fileSizeInMB > 1.5 || textLength > 12000) {
       let message = "";
       if (fileSizeInMB > 1.5) {
         message +=
           "File size is more than 1.5MB. \nConsider using PDF Compressor to reduce the size.";
       }
-      if (textLength > 6000) {
-        message += "Text characters are more than 6k.";
+      if (textLength > 12000) {
+        message += "Text characters are more than 12k.";
       }
       showModal(message); // Show modal with the message
       return false; // Stop further execution
@@ -120,9 +121,9 @@ const AtsForm = () => {
           <div>
             <label
               htmlFor="pdf"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-bold text-gray-700" // Changed font-medium to font-bold
             >
-              PDF File:
+              PDF File (Resume/CV):
             </label>
             <input
               type="file"
@@ -136,9 +137,10 @@ const AtsForm = () => {
           <div>
             <label
               htmlFor="text"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-lg font-bold text-gray-700"
             >
-              Text:
+              (Edit or Append) Keywords, Technologies, Skills or statements from
+              job description:
             </label>
             <textarea
               type="text"
