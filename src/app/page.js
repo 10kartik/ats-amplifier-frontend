@@ -112,11 +112,15 @@ export default function Home() {
           expertise are added to the PDF in a font size of 1 and in white color,
           rendering them invisible to the human eye but detectable by ATS
           algorithms. This hidden text is strategically placed at the top left
-          corner of the first page of the PDF. Users can verify the added
-          content by using the search or find function in any PDF reader. This
-          approach helps improve the chances of your resume getting noticed by
-          the ATS, thereby increasing your opportunities for landing the desired
-          job.
+          corner of the first page of the PDF.{" "}
+          <u>
+            Users can verify the added &rsquo;Keywords, Technologies, Skills or
+            statements from job description&rsquo; by using the search or find
+            function in any PDF reader.
+          </u>{" "}
+          This approach helps improve the chances of your resume getting noticed
+          by the ATS, thereby increasing your opportunities for landing the
+          desired job.
         </p>
         <br />
         <p
