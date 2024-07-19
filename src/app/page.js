@@ -53,12 +53,11 @@ export default function Home() {
     updateGradient(); // Initial update
     const intervalId = setInterval(updateGradient, 2000); // Update every 2 seconds
 
-    const warmUpLambda = async () => {
+    const warmUpLambda = () => {
       if (isRequestMade) return;
       try {
         const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
-        await fetch(`${baseUrl}/health`);
-        console.log("Lambda warmed up successfully");
+        fetch(`${baseUrl}/health`);
       } catch (error) {
         console.error("Error warming up lambda:", error);
       }
