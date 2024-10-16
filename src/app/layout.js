@@ -15,11 +15,6 @@ export default function RootLayout({ children }) {
   return (
     <>
       <Head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8729812116098552"
-          crossorigin="anonymous"
-        ></script>
         <title>ATS Score Booster by KK</title>
         <meta
           name="description"
@@ -29,6 +24,11 @@ export default function RootLayout({ children }) {
           name="keywords"
           content="ATS score booster, increase Resume ATS score, ATS system, resume improvement, free ATS score booster, increase ATS score for resume, boost ATS score, free resume score improvement, ATS friendly resume, improve CV for ATS, free resume optimization for ATS"
         />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8729812116098552"
+          crossorigin="anonymous"
+        ></script>
       </Head>
       <html lang="en">
         <body className={inter.className}>
