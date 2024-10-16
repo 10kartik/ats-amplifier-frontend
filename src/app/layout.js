@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <>
       <Head>
-        <title>ATS Score Booster by KK</title>
+        <title>10x Job Hunt - ATS Hacker</title>
         <meta
           name="description"
           content="Maximize your resume's compatibility with Applicant Tracking Systems (ATS) using our free ATS score booster. Enhance your CV's visibility and increase your chances of landing job interviews."
