@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import AtsForm from "../pages/AtsForm";
+import AtsForm from "./AtsForm";
 import { FaGithub } from "react-icons/fa"; // Assuming you're using react-icons for icons
 import { TypeAnimation } from "react-type-animation";
 
